@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recibo de sueldos</title>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+    <div class="contenedor">
+        <h1>Recibo de sueldos</h1>
+        <div class="datos-empleado">
+            <h2>Datos del empleado</h2>
+            <label for="nombre">Nombre y Apellido:</label>
+            <input type="text" id="nombre">
+            <label for="cuil">CUIL:</label>
+            <input type="text" id="cuil">
+            <label for="fecha">Fecha de ingreso:</label>
+            <input type="date" id="fecha">
+            <label for="categoria">Categoría:</label>
+            <select id="categoria" onchange="actualizarValorHora()">
+                <option value="Oficial Especializado">Oficial Especializado</option>
+                <option value="Oficial">Oficial</option>
+                <option value="Medio Oficial">Medio Oficial</option>
+                <option value="Ayudante">Ayudante</option>
+            </select>
+            <label for="valorHora">Valor hora:</label>
+            <input type="text" id="valorHora" readonly>
+        </div>
+        <div class="datos-recibo">
+            <h2>Datos del recibo</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Cantidad</th>
+                        <th>Remunerativo</th>
+                        <th>Descuento</th>
+                        <th>No remunerativo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Horas Normales</td>
+                        <td><input type="number" id="horasNormales" oninput="calcularSueldos()"></td>
+                        <td id="remuneracionNormal">$0.00</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Horas 50%</td>
+                        <td><input type="number" id="horasExtra50" oninput="calcularSueldos()"></td>
+                        <td id="remuneracionExtra50">$0.00</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Horas 100%</td>
+                        <td><input type="number" id="horasExtra100" oninput="calcularSueldos()"></td>
+                        <td id="remuneracionExtra100">$0.00</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Jubilación</td>
+                        <td><input type="number" id="jubilacion" value="11" readonly>%</td>
+                        <td></td>
+                        <td id="deduccionJubilacion">$0.00</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Obra social</td>
+                        <td><input type="number" id="obraSocial" value="3" readonly>%</td>
+                        <td></td>
+                        <td id="deduccionObraSocial">$0.00</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Ley 23.032</td>
+                        <td><input type="number" id="ley23032" value="3" readonly>%</td>
+                        <td></td>
+                        <td id="deduccionLey23032">$0.00</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Asignación Familiar</td>
+                        <td><input type="number" id="numeroHijos" oninput="calcularSueldos()"></td>
+                        <td></td>
+                        <td></td>
+                        <td id="remuneracionAsignacionFamiliar">$0.00</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>Subtotales</td>
+                        <td></td>
+                        <td id="totalRemunerativo">$0.00</td>
+                        <td id="totalDescuento">$0.00</td>
+                        <td id="totalNoRemunerativo">$0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Total a percibir</td>
+                        <td></td>
+                        <td colspan="3" id="totalSueldo">$0.00</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <button onclick="imprimirRecibo()">Imprimir</button>
+        </div>
+    </div>
+    <script src="java.js"></script>
+</body>
+
+</html>
